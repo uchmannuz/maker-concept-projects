@@ -14,55 +14,57 @@ using namespace std;
 
 void summary(string input)
 {
-	if(input.size() == 0)
+	//Ascii has 256 characters
+	int characterSummary[256];
+	//Get array size
+	int size = sizeof(characterSummary) / sizeof(characterSummary[0]);
+	//Initialize characterSummary array
+	for(int i = 0; i < size; i++)
 	{
-		cout << "The supplied String is empty. Please supply a valid String" << endl;
-	}else
+		characterSummary[i] = 0;
+	}
+	int wordCount = 0;
+	bool foundCharacter = false;
+	//Get character count
+	for (auto x : input)
 	{
-		//Ascii has 256 characters
-		int characterSummary[256];
-		//Get array size
-		int size = sizeof(characterSummary) / sizeof(characterSummary[0]);
-		//Initialize characterSummary array
-		for(int i = 0; i < size; i++)
+		if(x == ' ' || x == '.' || x == ',' || x == '!')
 		{
-			characterSummary[i] = 0;
-		}
-		int wordCount = 0;
-		bool foundCharacter = false;
-		//Get character count
-		for (auto x : input)
-		{
-			if(x == ' ' || x == '.' || x == ',' || x == '!')
+			if(!foundCharacter)
 			{
-				if(!foundCharacter)
-				{
-					++wordCount;
-				}
-				foundCharacter = true;
-			}else
-			{
-				foundCharacter = false;
+				++wordCount;
 			}
-			++characterSummary[(int)x];
-		}
-		if(!foundCharacter)
+			foundCharacter = true;
+		}else
 		{
-			++wordCount;
+			foundCharacter = false;
 		}
-		cout << "Total Number of Words = " << wordCount << endl;
-		for(int i = 0; i < size; i++)
+		++characterSummary[(int)x];
+	}
+	if(!foundCharacter)
+	{
+		++wordCount;
+	}
+	cout << "Total Number of Words = " << wordCount << endl;
+	for(int i = 0; i < size; i++)
+	{
+		if(characterSummary[i] > 0)
 		{
-			if(characterSummary[i] > 0)
-			{
-				char a = i;
-				cout << a << " = " << characterSummary[i] << endl;
-			}
+			char a = i;
+			cout << a << " = " << characterSummary[i] << endl;
 		}
 	}
 }
 
 int main() {
-	summary("The Courses can be, entered in. any order but the double commas.");
+	string sentence;
+	getline(cin, sentence);
+	if(sentence.size() == 0)
+	{
+		cout << "The supplied String is empty. Please supply a valid String" << endl;
+	}else
+	{
+		summary(sentence);
+	}
 	return 0;
 }
