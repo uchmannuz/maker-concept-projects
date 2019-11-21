@@ -3,7 +3,7 @@
 // Author      : Uchenna Nwanyanwu
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Sentence summary
 //============================================================================
 
 #include <iostream>
@@ -28,6 +28,7 @@ void summary(string input)
 	//Get character count
 	for (auto x : input)
 	{
+		if(x == 13) continue;
 		if(x == ' ' || x == '.' || x == ',' || x == '!')
 		{
 			if(!foundWordCharacter && foundFirstWord)
@@ -49,7 +50,7 @@ void summary(string input)
 	cout << "Total Number of Words = " << wordCount << endl;
 	for(int i = 0; i < size; i++)
 	{
-		if(characterSummary[i] > 0)
+		if(i != 13 && characterSummary[i] > 0)
 		{
 			char a = i;
 			cout << a << " = " << characterSummary[i] << endl;
