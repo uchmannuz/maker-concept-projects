@@ -24,24 +24,25 @@ void summary(string input)
 		characterSummary[i] = 0;
 	}
 	int wordCount = 0;
-	bool foundCharacter = false;
+	bool foundWordCharacter = false, foundFirstWord = false;
 	//Get character count
 	for (auto x : input)
 	{
 		if(x == ' ' || x == '.' || x == ',' || x == '!')
 		{
-			if(!foundCharacter)
+			if(!foundWordCharacter && foundFirstWord)
 			{
 				++wordCount;
 			}
-			foundCharacter = true;
+			foundWordCharacter = true;
 		}else
 		{
-			foundCharacter = false;
+			foundWordCharacter = false;
+			foundFirstWord = true;
 		}
 		++characterSummary[(int)x];
 	}
-	if(!foundCharacter)
+	if(!foundWordCharacter && foundFirstWord)
 	{
 		++wordCount;
 	}
