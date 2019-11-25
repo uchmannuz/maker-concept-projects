@@ -36,6 +36,10 @@ int main() {
 	{
 		try
 		{
+			if(token.empty())
+			{
+				continue;
+			}
 			long long i = stoll(token);
 			accept(i, 20);
 		}catch(invalid_argument const &e)
