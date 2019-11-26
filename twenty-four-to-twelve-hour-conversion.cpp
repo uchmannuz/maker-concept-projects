@@ -44,23 +44,27 @@ int main() {
 			if(hour > 23 || hour < 0)
 			{
 				cout << "Invalid Hour" << endl;
-			}
-			if(minute > 59 || minute < 0)
+			}else
 			{
-				cout << "Invalid Minute" << endl;
-			}
-			if(hour == 0)
-			{
-				hour = 12;
-			}else if(hour >=12 && hour <= 23)
-			{
-				if(hour != 12)
+				if(minute > 59 || minute < 0)
 				{
-					hour = hour % 12;
+					cout << "Invalid Minute" << endl;
+				}else
+				{
+					if(hour == 0)
+					{
+						hour = 12;
+					}else if(hour >=12 && hour <= 23)
+					{
+						if(hour != 12)
+						{
+							hour = hour % 12;
+						}
+						a = "PM";
+					}
+					cout << "Time in 12-hour notation = " << hour << ":" << minute << " " << a << endl;
 				}
-				a = "PM";
 			}
-			cout << "Time in 12-hour notation = " << hour << ":" << minute << " " << a << endl;
 		}catch(invalid_argument const &e)
 		{
 			cout << "Bad input: " << token << endl;
